@@ -1,0 +1,26 @@
+{
+    "name": "backender/ui",
+    "description": "Backender UI package",
+    "authors": [
+        {
+            "name": "Syntesy Digital",
+            "email": "contact@syntesy.io"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Backender\\UI\\BackenderUIProvider"
+            ],
+            "aliases": {}
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Backender\\UI\\": ""
+        }
+    }
+}
