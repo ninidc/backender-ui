@@ -24,7 +24,7 @@ class BackenderUIProvider extends ServiceProvider
      */
     public function boot(Router $router)
     {
-        $this->loadViewsFrom(__DIR__.'/Resources/views', 'backender:ui');
+        $this->loadViewsFrom(__DIR__.'/Ressources/views', 'backender:ui');
     }   
 
     /**

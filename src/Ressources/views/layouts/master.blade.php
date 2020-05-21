@@ -32,6 +32,15 @@
         <!-- Language -->
         <script src="{{ asset('backender/contents/js/lang.dist.js') }}"></script>
 
+        <!-- Dropzone -->
+        {{ Html::script('/backender/contents/plugins/dropzone/dropzone.min.js') }}
+        {{ HTML::style('/backender/contents/plugins/dropzone/dropzone.min.css') }}
+
+        <!-- Datatable -->
+        {{ Html::script('/backender/contents/plugins/datatables/datatables.min.js') }}
+        {{ HTML::style('/backender/contents/plugins/datatables/datatables.min.css') }}
+        {{ Html::script('/backender/contents/js/libs/datatabletools.js') }}
+
         <script>
             Lang.setLocale('{{App::getLocale()}}');
         </script>
@@ -42,22 +51,21 @@
             jQuery.event.special.touchstart = {
               setup: function( _, ns, handle ){
                 if ( ns.includes("noPreventDefault") ) {
-                  this.addEventListener("touchstart", handle, { passive: false });
+                    this.addEventListener("touchstart", handle, { passive: false });
                 } else {
-                  this.addEventListener("touchstart", handle, { passive: true });
+                    this.addEventListener("touchstart", handle, { passive: true });
                 }
               }
             };
 
             var error = "";
-
-            @if(isset($errors))
-                @if (count($errors) > 0)
-                    @foreach ($errors->all() as $error)
-                        error += "- {{$error}}<br/>";
-                    @endforeach
-                @endif
+   
+            @if (isset($errors) && count($errors) > 0)
+                @foreach ($errors->all() as $error)
+                    error += "- {{$error}}<br/>";
+                @endforeach
             @endif
+       
 
             @if(Session::has('notify_error'))
                 error += "- {{ Session::get('notify_error') }}<br/>";
@@ -67,17 +75,14 @@
               toastr.error(error, 'Error', {timeOut: 10000});
 
             @if(Session::has('notify_success'))
-              toastr.success("{{ Session::get('notify_success') }}", 'Success', {timeOut: 3000});
+                toastr.success("{{ Session::get('notify_success') }}", 'Success', {timeOut: 3000});
             @endif
           });
         </script>
 
-        <!-- App -->
-        <link rel="stylesheet" media="all" href="{{ asset('/backender/contents/css/app.css')}}" />
-        <script src="{{ asset('backender/contents/js/app.js') }}" defer></script>
+ 
 
         @stack('stylesheets')
-
         @stack('plugins')
     </head>
 
@@ -89,15 +94,16 @@
 
             <section id="wrapper">
                 <section id="main">
-                    @if(Auth::user())
-                        @if(!isset($hideTopbar) || (isset($hideTopbar) && $hideTopbar === false))
-        	        	      @include('backender:ui::layouts.topbar')
-                        @endif
+                    
+                    @if(Auth::user() && (!isset($hideTopbar) || (isset($hideTopbar) && $hideTopbar === false)))
+                        @include('backender:ui::layouts.topbar')
                     @endif
+              
 
     	        	<section id="content">
     	        		@yield('content')
-    	        	</section>
+                    </section>
+                    
     	        </section>
             </section>
 
@@ -107,8 +113,12 @@
 
         @stack('javascripts-libs')
 
-        @stack('javascripts')
+        <!-- Contents module -->
+        {{ HTML::style('/backender/contents/css/app.css') }}
+        {{ Html::script('/backender/contents/js/app.js') }}
+        {{ Html::script('/backender/contents/js/contents.js') }}
 
+        @stack('javascripts')
     </body>
 
 </html>

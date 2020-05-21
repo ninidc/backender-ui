@@ -19,21 +19,21 @@
               <div class="row">
 
                 <div id="logo-wrapper" class="col-xs-2">
-                  <a href="{{route('home')}}" class="logo-link">
-                    @if(isset($storedStylesBack['backLogo']) && isset($storedStylesBack['backLogo']->value))
-                      <img src="/{{$storedStylesBack['backLogo']->value->urls['original']}}" alt="Logo" />
-                    @else
-                      <img src="{{asset('backender/contents/images/client-logo.jpg')}}" alt="Logo" />
-                    @endif
-                  </a>
+                    <a href="{{route('home')}}" class="logo-link">
+                        @if(isset($storedStylesBack['backLogo']) && isset($storedStylesBack['backLogo']->value))
+                            <img src="/{{$storedStylesBack['backLogo']->value->urls['original']}}" alt="Logo" />
+                        @else
+                            <img src="{{asset('backender/contents/images/client-logo.jpg')}}" alt="Logo" />
+                        @endif
+                    </a>
                 </div>
 
                 <div class="col-xs-8">
-                  <nav class="main-nav">
-                    <ul>
-                        @include('backender:contents::partials.topbar-menu')
-                    </ul>
-                  </nav>
+                    <nav class="main-nav">
+                        <ul>
+                            @include('backender:ui::partials.topbar-menu')
+                        </ul>
+                    </nav>
                 </div>
 
                 <div class="col-xs-2">
